@@ -4,9 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>بررسي تخفيف</title>
+
+  <!-- بارگذاری فونت وزیر از CDN معتبر -->
+  <link href="https://cdn.fontcdn.ir/Font/%20Vazir/Vazir.css" rel="stylesheet" type="text/css" />
+
   <style>
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Vazir', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
       padding: 0;
       background-color: #3498db; /* کل صفحه آبی */
@@ -16,6 +20,7 @@
       align-items: center;
     }
 
+    /* بقیه استایل‌ها بدون تغییر باقی می‌مانند */
     .logo {
       padding: 16px 0;
       display: flex;
@@ -69,7 +74,6 @@
     .error { background: #f8d7da; color: #721c24; }
     .loading { background: #e3f2fd; color: #1976d2; }
 
-    /* استایل تصاویر زیر فرم */
     .images-row {
       display: flex;
       justify-content: center;
@@ -104,22 +108,21 @@
     <input type="tel" id="phone" placeholder="شماره تلفن متقاضی را وارد کنيد (مثلاً 09123456789)" />
     <button onclick="checkDiscount()">بررسی تخفيف</button>
     <div id="result"></div>
-     </div>
-         
+  </div>
+
   <!-- دو تصویر زیر فرم -->
   <div class="images-row">
     <img src="1.png" alt="تصویر 1">
-      </div>
+  </div>
 
   <script>
     const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwDQJXt-XenEh6EupyXhNPi4fgHx0NXNID-mF5tbm9YLckScd0MdcDCWBhEYu9lkdd5/exec";
-    
+
     async function checkDiscount() {
       const phoneInput = document.getElementById("phone");
       const resultDiv = document.getElementById("result");
       const phone = phoneInput.value.trim();
 
-      // پاک کردن هر محتوای قبلی
       resultDiv.textContent = "";
       resultDiv.className = "";
 
@@ -134,37 +137,34 @@
         return;
       }
 
-      // نمایش پیام لودینگ
-    showResult("لطفاً کمی صبر کنید، در حال بررسی...", "loading");
+      showResult("لطفاً کمی صبر کنید، در حال بررسی...", "loading");
       try {
         const response = await fetch(`${WEB_APP_URL}?phone=${encodeURIComponent(cleanPhone)}`);
         const data = await response.json();
 
         if (data.success) {
           showResult(
-                  `نام: ${data.name}<br>
-                   شماره تلفن: ${cleanPhone}<br>
-                   ${data.discount}   کارت تخفیف فعال است.<br>
-                   سه رقم آخر شماره دانشجویی/پرسنلی: ${data.password}`,
-                   "success"
-  );
-} 
-        else {
+            `نام: ${data.name}<br>
+             شماره تلفن: ${cleanPhone}<br>
+             ${data.discount}   کارت تخفیف فعال است.<br>
+             سه رقم آخر شماره دانشجویی/پرسنلی: ${data.password}`,
+            "success"
+          );
+        } else {
           showResult(data.message || "اين شماره معتبر نيست.", "error");
         }
       } catch (error) {
         console.error("خطا:", error);
         showResult("خطا در اتصال به سرور. لطفاً دوباره تلاش کنيد.", "error");
       }
-      // پاک کردن فیلد شماره تلفن
       phoneInput.value = "";
     }
 
     function showResult(message, type) {
-    const resultDiv = document.getElementById("result");
-    resultDiv.innerHTML = message; 
-    resultDiv.className = type;
-}
+      const resultDiv = document.getElementById("result");
+      resultDiv.innerHTML = message;
+      resultDiv.className = type;
+    }
   </script>
 </body>
 </html>

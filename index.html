@@ -139,7 +139,7 @@
           const creditStr = (typeof data.credit === 'number') ? data.credit.toLocaleString() : data.credit;
           const inShopPayStr = (typeof data.inShopPay === 'number') ? data.inShopPay.toLocaleString() : data.inShopPay;
           const message = `کد تخفیف صحیح است.<br>
-                           ${data.name} کارت تخفیف ${creditStr} تومانی را پیش‌خرید کرده است و باید مبلغ ${inShopPayStr} را به شما پرداخت کند.`;
+                           ${data.name} کارت تخفیف ${creditStr} تومانی را پیش‌خرید کرده است و باید مبلغ ${inShopPayStr} تومان را به شما پرداخت کند.`;
           showResult(message, "success");
         } else {
           showResult(data.message || "خطای نامشخص.", "error");

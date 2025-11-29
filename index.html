@@ -138,8 +138,12 @@
         if (data.success) {
           const creditStr = (typeof data.credit === 'number') ? data.credit.toLocaleString() : data.credit;
           const inShopPayStr = (typeof data.inShopPay === 'number') ? data.inShopPay.toLocaleString() : data.inShopPay;
-          const message = `کد تخفیف صحیح است.<br>
-                           ${data.name} کارت تخفیف ${creditStr} تومانی را پیش‌خرید کرده است و باید مبلغ ${inShopPayStr} تومان را به شما پرداخت کند.`;
+          const message = `
+این کد تخفیف معتبر است.<br>
+نام و نام خانوادگی: <strong>${data.name}</strong><br>
+اعتبار کارت تخفیف: <strong>${creditStr}</strong><br>
+پرداخت در فروشگاه: <strong>${inShopPayStr}</strong>
+`;
           showResult(message, "success");
         } else {
           showResult(data.message || "خطای نامشخص.", "error");

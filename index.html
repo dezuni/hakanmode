@@ -139,7 +139,7 @@
           const creditStr = (typeof data.credit === 'number') ? data.credit.toLocaleString() : data.credit;
           const inShopPayStr = (typeof data.inShopPay === 'number') ? data.inShopPay.toLocaleString() : data.inShopPay;
           const message = `
-این کد تخفیف معتبر است.<br>
+کد تخفیف <strong>${data.DiscountCode} معتبر است.<br>
 نام و نام خانوادگی: <strong>${data.name}</strong><br>
 اعتبار کارت تخفیف: <strong>${creditStr} تومان</strong><br>
 پرداخت در فروشگاه: <strong>${inShopPayStr} تومان</strong>
